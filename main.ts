@@ -100,6 +100,8 @@ basic.forever(function () {
                 . . . . .
                 . . . . .
                 `)
+            X = 0
+            Y = 0
         }
         A = 0
     }
