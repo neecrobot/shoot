@@ -1,9 +1,11 @@
 let GY = 0
 let GX = 0
+let M = 0
 let X = 0
 let Y = 0
 let A = 0
-let M = 0
+A = 0
+let SCORE = 0
 basic.forever(function () {
     if (A == 0 && M == 0) {
         if (input.buttonIsPressed(Button.A)) {
@@ -13,7 +15,7 @@ basic.forever(function () {
     }
 })
 basic.forever(function () {
-    if (A == 1) {
+    if (M == 1) {
         basic.showLeds(`
             # . . . #
             . . . . .
@@ -42,17 +44,17 @@ basic.forever(function () {
             . . . . .
             . . . . .
             `)
-        A = 2
+        M = 2
     }
 })
 basic.forever(function () {
-    if (M == 1) {
+    if (A == 1) {
+        A = 0
         music.playMelody("C5 B A G F E D C ", 1000)
-        M = 0
-    } else if (M == 2) {
+    } else if (A == 2) {
+        A = 0
         for (let カウンター = 0; カウンター <= 4; カウンター++) {
             music.playMelody("C D E F G A B C5 ", 3000)
-            M = 0
         }
     }
 })
@@ -80,9 +82,9 @@ basic.forever(function () {
     }
     basic.pause(100)
     led.plot(X, Y)
-    if (A == 2) {
+    if (M == 2) {
         if (X == 2 && Y == 2) {
-            M = 2
+            A = 2
             basic.showLeds(`
                 . . . . .
                 . # # # .
@@ -106,8 +108,14 @@ basic.forever(function () {
                 `)
             X = 0
             Y = 0
+            SCORE = SCORE + 1
+            for (let index = 0; index < 4; index++) {
+                basic.showNumber(SCORE)
+                basic.clearScreen()
+                basic.pause(100)
+            }
         }
-        A = 0
+        M = 0
     }
     basic.pause(100)
 })
